@@ -59,15 +59,15 @@ if ( isset($_POST["submit"]) == "Opladen" )
             switch ( $inputname )
             {
                 case "pasfoto":
-                    $target = "pasfoto_" . $_SESSION["usr"]["usr_id"] . "." . $extensie;
+                    $target = "pasfoto_" . $_SESSION['usr']->getId() . "." . $extensie;
                     $images[] = "usr_pasfoto='" . $target . "'";
                     break;
                 case "eidvoor":
-                    $target = "eidvoor_" . $_SESSION["usr"]["usr_id"] . "." . $extensie;
+                    $target = "eidvoor_" . $_SESSION['usr']->getId() . "." . $extensie;
                     $images[] = "usr_vz_eid='" . $target . "'";
                     break;
                 case "eidachter":
-                    $target = "eidachter_" . $_SESSION["usr"]["usr_id"] . "." . $extensie;
+                    $target = "eidachter_" . $_SESSION['usr']->getId() . "." . $extensie;
                     $images[] = "usr_az_eid='" . $target . "'";
                     break;
             }
@@ -86,10 +86,11 @@ if ( isset($_POST["submit"]) == "Opladen" )
     }
 
     //de afbeeldingen opslaan in het gebruikersprofiel
-    $sql = "update users SET " . implode("," , $images) . " where usr_id=" . $_SESSION["usr"]["usr_id"];
+    $sql = "update users SET " . implode("," , $images) . " where usr_id=" . $_SESSION['usr']->getId();
     ExecuteSQL($sql);
 
     //eventueel een redirect naar de profielpagina
+    header("Location: $_application_folder/profiel.php");
 
 }
 ?>
