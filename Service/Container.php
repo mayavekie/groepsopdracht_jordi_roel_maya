@@ -31,10 +31,10 @@ class Container
     }
 
     /**
-     * @return CityLoader
+     * @return CityHandler
      */
     public function getCityHandler(){
-        if ($this->cityhandler === null) $this->cityhandler = new CityLoader($this->getPDO());
+        if ($this->cityhandler === null) $this->cityhandler = new CityHandler($this->getPDO());
         return $this->cityhandler;
     }
 

@@ -23,11 +23,9 @@ $MS->ShowMessages();
     <div class="row">
 
         <?php
-        $cityLoader = new CityHandler();
-        $cities = $cityLoader->Load();
-
-        $template = LoadTemplate("steden");
-        print ReplaceCities( $cities, $template);
+        $container = new Container($configuration);
+        $cityHandler = $container->getCityHandler();
+        $cityHandler->LoadCityTemplate("steden");
         ?>
 
     </div>

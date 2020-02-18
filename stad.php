@@ -14,11 +14,9 @@ BasicHead( $css );
     <div class="row">
 
         <?php
-        $cityLoader = new CityHandler();
-        $cities = $cityLoader->Load( $id = $_GET['id'] );
-
-        $template = LoadTemplate("stad");
-        print ReplaceCities( $cities, $template);
+        $container = new Container($configuration);
+        $cityHandler = $container->getCityHandler();
+        $cityHandler->LoadCityTemplate("stad", $_GET['id']);
         ?>
 
     </div>

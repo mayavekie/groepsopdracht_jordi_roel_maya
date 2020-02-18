@@ -1,6 +1,11 @@
 <?php
 class CityHandler
 {
+    private $pdo;
+
+    public function __construct(PDO $pdo){
+        $this->pdo = $pdo;
+    }
 
     public function Load( $id = null )
     {
@@ -24,6 +29,12 @@ class CityHandler
         }
 
         return $cities;
+    }
+
+    public function LoadCityTemplate($cityTemplate, $id = null) {
+        $template = LoadTemplate($cityTemplate);
+        $cities = $this->Load($id);
+        print ReplaceCities( $cities, $template);
     }
 
 }
