@@ -1,0 +1,49 @@
+<form id="registration_form" method="post" action="lib/register.php">
+
+        <input type="hidden" id="formname" name="formname" value="registration_form">
+        <input type="hidden" id="tablename" name="tablename" value="users">
+        <input type="hidden" id="pkey" name="pkey" value="usr_id">
+
+    <div class="form-group row">
+        <label for="usr_voornaam" class="col-form-label">Voornaam</label>
+            <input type="text" class="form-control" id="usr_voornaam" name="usr_voornaam" value="">
+    </div>
+
+    <div class="form-group row">
+        <label for="usr_naam" class="col-form-label">Naam</label>
+            <input type="text" class="form-control" id="usr_naam" name="usr_naam" value="">
+    </div>
+
+    <div class="form-group row">
+        <label for="usr_naam" class="col-form-label">Straat / Huisnr / Busnr</label>
+            <input type="text" class="form-control straat" id="usr_straat" name="usr_straat" value="">
+            <input type="text" class="form-control huisnr" id="usr_huisnr" name="usr_huisnr" value="">
+            <input type="text" class="form-control busnr" id="usr_busnr" name="usr_busnr" value="">
+    </div>
+
+    <div class="form-group row">
+        <label for="usr_naam" class="col-form-label">Postcode / Gemeente</label>
+            <input type="text" class="form-control postcode" id="usr_postcode" name="usr_postcode" value="">
+            <input type="text" class="form-control gemeente" id="usr_gemeente" name="usr_gemeente" value="">
+    </div>
+
+    <div class="form-group row">
+        <label for="usr_naam" class="col-form-label">Telefoon</label>
+            <input type="text" class="form-control" id="usr_telefoon" name="usr_telefoon" value="">
+    </div>
+
+    <div class="form-group row">
+        <label for="usr_login" class="col-form-label">E-mail</label>
+            <input type="email" class="form-control" id="usr_login" name="usr_login" value="">
+    </div>
+
+    <div class="form-group row">
+        <label for="usr_paswd" class="col-form-label">Wachtwoord</label>
+            <input type="password" class="form-control" id="usr_paswd" name="usr_paswd" value="">
+    </div>
+
+    <input name="registerbutton" type="submit" value="Register">
+
+    <div class="vertical_space_10vh"></div>
+
+</form>

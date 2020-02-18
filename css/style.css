@@ -1,0 +1,132 @@
+.img-fluid {
+    width: 100%;
+}
+
+h3, p {
+    /* text-align: center; */
+}
+
+.img_div {
+}
+
+.float_left {
+    float: left;
+}
+
+.col-form-label {
+    width: 30%;
+}
+
+form {
+    width: 100%;
+}
+
+.breadcrumb-item, .breadcrumb {
+    /* background: #872525; */
+
+    color: white;
+    border-radius: 0;
+    margin-bottom: 0;
+}
+
+.breadcrumb.error, .breadcrumb-item.error {
+    font-weight: bold;
+    color: white;
+    background: red;
+}
+
+.breadcrumb.info, .breadcrumb-item.info {
+    font-weight: bold;
+    color: #04520c;
+    background: lightgreen;
+}
+
+
+ #form_stad, #registration_form {
+    margin: 0 auto;
+
+    margin-top: 10vh;
+    margin-bottom: 20px;
+}
+
+ #form_stad input.form-control {
+     width: 100%;
+ }
+
+#login_form input.form-control {
+    width: 100%;
+}
+
+#login_form {
+    margin: 0 auto;
+
+    margin-top: 10vh;
+    margin-bottom: 20px;
+    margin-left: 20vw;
+
+    width: 50vw;
+}
+
+.jumbotron {
+    margin-bottom: 0;
+}
+
+.navbar {
+    margin-bottom: 5vh;
+}
+
+div.vertical_space_10vh
+{
+    display: block;
+    width: 100%;
+    height: 10vh;
+}
+
+.form-group.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+input.form-control {
+    width: 50%;
+    margin-right: 20px;
+}
+
+input.form-control.straat, input.form-control.gemeente {
+    width: 30%;
+}
+
+input.form-control.huisnr, input.form-control.busnr {
+    width: 5%;
+}
+
+input.form-control.postcode {
+    width: 10%;
+}
+
+.uploadbutton {
+    padding: 0px;
+    padding-bottom: 10px;
+
+}
+
+img.thumbnail {
+    width: 15vw;
+    margin-right: 2vw;
+    border: 1px solid #ccc;
+}
+
+div.div_thumb {
+    height: 40%;
+    overflow: hidden;
+    margin-bottom: 2vh;
+}
+
+span.img_name {
+    font-size: 10px;
+    overflow: hidden;
+}
+
+.img_city {
+    margin-top: 15vh;
+}

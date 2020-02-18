@@ -1,0 +1,72 @@
+
+
+    <div class="col-sm-4 float_left">
+
+        <form id="form_stad" method="post" action="lib/save.php">
+
+            <input type="hidden" id="formname" name="formname" value="stad_form">
+            <input type="hidden" id="afterinsert" name="afterinsert" value="steden.php">
+            <input type="hidden" id="tablename" name="tablename" value="images">
+            <input type="hidden" id="pkey" name="pkey" value="img_id">
+
+        <div class="form-group">
+
+            <label for="img_title" class="col-form-label">Id</label>
+            <div>
+                <input readonly type="text" class="form-control" id="img_id" name="img_id" value="@@img_id@@">
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="img_title" class="col-form-label">Titel</label>
+            <div>
+                <input type="text" class="form-control" id="img_title" name="img_title" value="@@img_title@@">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="img_width" class="col-form-label">Width</label>
+            <div>
+                <input type="text" class="form-control" id="img_width" name="img_width" value="@@img_width@@">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="img_height" class="col-form-label">Height</label>
+            <div>
+                <input type="text" class="form-control" id="img_height" name="img_height" value="@@img_height@@">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="img_filename" class="col-form-label">Filename</label>
+            <div>
+                <input type="text" class="form-control" id="img_filename" name="img_filename" value="@@img_filename@@">
+            </div>
+
+        </div>
+
+        <input name=savebutton type="submit" value="Save">
+
+        </form>
+
+    </div>
+
+    <div class="col-sm-8 float_left">
+            <img class="img-fluid img_city" src=img/@@img_filename@@.jpg>
+    </div>
+
+
+
+<br>
+
+
