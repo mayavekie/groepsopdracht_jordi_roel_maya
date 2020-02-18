@@ -10,6 +10,8 @@ require_once $_root_folder . "/Model/User.php";
 require_once $_root_folder . "/Service/CityHandler.php";
 require_once $_root_folder . "/Service/Container.php";
 require_once $_root_folder . "/Service/MessageService.php";
+require_once $_root_folder . "/Service/Download.php";
+require_once $_root_folder . "/Service/UserLoader.php";
 
 session_start();
 $_SESSION["head_printed"] = false;

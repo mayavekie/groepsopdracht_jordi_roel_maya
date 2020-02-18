@@ -90,7 +90,7 @@ if ( isset($_POST["submit"]) == "Opladen" )
     ExecuteSQL($sql);
 
     //eventueel een redirect naar de profielpagina
-    header("Location: $_application_folder/profiel.php");
+    //header("Location: $_application_folder/profiel.php");
 
 }
 ?>
