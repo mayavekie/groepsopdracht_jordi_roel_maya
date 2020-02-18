@@ -1,5 +1,5 @@
 <?php
-$_application_folder = "/groepsopdracht";
+$_application_folder = "/groepswerken/groepswerk_di";
 $_root_folder = $_SERVER['DOCUMENT_ROOT'] . "$_application_folder";
 
 //load Models
