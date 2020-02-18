@@ -1,5 +1,5 @@
 <?php
-class CityLoader
+class CityHandler
 {
 
     public function Load( $id = null )

@@ -14,7 +14,7 @@ BasicHead( $css );
     <div class="row">
 
         <?php
-        $cityLoader = new CityLoader();
+        $cityLoader = new CityHandler();
         $cities = $cityLoader->Load( $id = $_GET['id'] );
 
         $template = LoadTemplate("stad");

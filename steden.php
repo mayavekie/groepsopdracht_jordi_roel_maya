@@ -23,7 +23,7 @@ $MS->ShowMessages();
     <div class="row">
 
         <?php
-        $cityLoader = new CityLoader();
+        $cityLoader = new CityHandler();
         $cities = $cityLoader->Load();
 
         $template = LoadTemplate("steden");
