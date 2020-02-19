@@ -3,7 +3,7 @@ $no_access = true;
 require_once "lib/autoload.php";
 
 $css = array( "style.css");
-BasicHead( $css );
+$PL->BasicHead( $css );
 
 ?>
 <body>
@@ -16,7 +16,7 @@ BasicHead( $css );
 <div class="container">
 
         <?php
-        print LoadTemplate("no_access");
+        print $PL->LoadTemplate("no_access");
         ?>
 
 </div>

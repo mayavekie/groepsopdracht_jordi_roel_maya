@@ -1,4 +1,8 @@
 <?php
+//ini_set("error_reporting", E_ALL);
+//ini_set("display_errors", 1);
+//ini_set("display_startup_errors", 1);
+
 $_application_folder = "/groepswerken/groepswerk_di";
 $_root_folder = $_SERVER['DOCUMENT_ROOT'] . "$_application_folder";
 
@@ -8,19 +12,23 @@ require_once $_root_folder . "/Model/User.php";
 
 //load Services
 require_once $_root_folder . "/Service/CityHandler.php";
-require_once $_root_folder . "/Service/Container.php";
 require_once $_root_folder . "/Service/MessageService.php";
+require_once $_root_folder . "/Service/Container.php";
+require_once $_root_folder . "/Service/PageLoader.php";
 require_once $_root_folder . "/Service/Download.php";
 require_once $_root_folder . "/Service/UserLoader.php";
 
 session_start();
 $_SESSION["head_printed"] = false;
 
-$MS = new MessageService();
+
 
 require_once $_root_folder . "/lib/passwd.php";
-require_once $_root_folder . "/lib/pdo.php";                          //database functies
-require_once $_root_folder . "/lib/view_functions.php";      //basic_head, load_template, replacecontent...
+
+$Container = new Container($configuration);
+$PL = $Container->getPageLoader();
+$MS = $Container->getMessageService();
+
 
 //redirect naar NO ACCESS pagina als de gebruiker niet ingelogd is en niet naar
 //de loginpagina gaat

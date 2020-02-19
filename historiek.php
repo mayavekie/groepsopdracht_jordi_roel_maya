@@ -2,14 +2,14 @@
 require_once "lib/autoload.php";
 
 $css = array( "style.css");
-BasicHead($css);
+$PL->BasicHead($css);
 ?>
     <body>
 
     <div class="jumbotron text-center">
         <h1>Mijn historiek</h1>
     </div>
-    <?php PrintNavBar(); ?>
+    <?php $PL->PrintNavBar(); ?>
 
     <div class="container">
         <div class="row">
@@ -22,7 +22,7 @@ BasicHead($css);
                 </tr>
                     <?php
                         $sql = "SELECT * FROM log_user WHERE log_usr_id=" . $_SESSION['usr']->getId() . " ORDER BY log_in" ;
-                        $data = GetData($sql);
+                        $data = $Container->getPDOData($sql);
 
                         foreach( $data as $row )
                         {

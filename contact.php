@@ -3,7 +3,7 @@
 require_once "lib/autoload.php";
 
 $css = array( "style.css");
-BasicHead( $css );
+$PL->BasicHead( $css );
 
 $MS->ShowMessages();
 ?>
@@ -13,7 +13,7 @@ $MS->ShowMessages();
     <h1>Contact</h1>
 </div>
 
-<?php PrintNavBar(); ?>
+<?php $PL->PrintNavBar(); ?>
 
 <div class="container">
     <div class="row">

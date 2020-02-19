@@ -87,7 +87,7 @@ if ( isset($_POST["submit"]) == "Opladen" )
 
     //de afbeeldingen opslaan in het gebruikersprofiel
     $sql = "update users SET " . implode("," , $images) . " where usr_id=" . $_SESSION['usr']->getId();
-    ExecuteSQL($sql);
+    $Container->getPDOtoExecute($sql);
 
     //eventueel een redirect naar de profielpagina
     //header("Location: $_application_folder/profiel.php");

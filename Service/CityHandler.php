@@ -1,21 +1,27 @@
 <?php
 class CityHandler
 {
-    private $pdo;
 
+    private $pdo;
+    private $sql;
+
+    /**
+     * CityHandler constructor.
+     * @param PDO $pdo
+     */
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
     }
 
-    public function Load( $id = null )
+
+    public function Load(  )
     {
         $cities = array();
 
-        $sql = "select * from images";
-        if ( $id > 0 ) $sql .= " where img_id=$id";
+        $sql = $this->queryForCities($id = $_GET['id']);
 
-        $data = GetData($sql);
-        foreach ( $data as $row )
+        $data = $this->getPDOData($sql);
+        foreach ($data as $row)
         {
             $city = new City();
 
@@ -31,10 +37,38 @@ class CityHandler
         return $cities;
     }
 
-    public function LoadCityTemplate($cityTemplate, $id = null) {
-        $template = LoadTemplate($cityTemplate);
-        $cities = $this->Load($id);
-        print ReplaceCities( $cities, $template);
+    private function queryForCities($id = null){
+        $pdo = $this->getPDO();
+        if($id >0) {
+            $statement = $pdo->prepare('SELECT * FROM images where img_id= '.$id.'');
+        }else{
+            $statement = $pdo->prepare('SELECT * FROM images');
+        }
+
+        $statement->execute();
+        $cityArray = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $cityArray;
+    }
+
+    /**
+     * @return PDO
+     */
+    private function getPDO(){
+        return $this->pdo;
+    }
+
+    public function getPDOData($sql){
+        $this->pdo = $sql;
+        return $sql;
+    }
+
+
+
+    public function LoadCityTemplate($cityTemplate) {
+        global $PL;
+        $template = $PL->LoadTemplate($cityTemplate);
+        $cities = $this->Load();
+        print $PL->ReplaceCities( $cities, $template);
     }
 
 }

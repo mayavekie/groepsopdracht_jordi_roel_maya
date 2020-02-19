@@ -3,7 +3,7 @@ $register_form = true;
 require_once "lib/autoload.php";
 
 $css = array( "style.css");
-BasicHead( $css );
+$PL->BasicHead( $css );
 ?>
 <body>
 
@@ -15,7 +15,7 @@ BasicHead( $css );
     <div class="row">
 
         <?php
-        print LoadTemplate("register");
+        print $PL->LoadTemplate("register");
         ?>
 
     </div>

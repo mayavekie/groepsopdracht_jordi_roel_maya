@@ -9,7 +9,8 @@ class MessageService
 
     public function ShowMessages()
     {
-        if ( ! $_SESSION["head_printed"] ) BasicHead();
+        global $PL;
+        if ( ! $_SESSION["head_printed"] ) $PL->BasicHead();
 
         //weergeven 2 soorten messages: errors en infos
         foreach( array("error", "info") as $type )
@@ -19,8 +20,8 @@ class MessageService
                 foreach( $_SESSION["$type"] as $message )
                 {
                     $row = array( "message" => $message );
-                    $templ = LoadTemplate("$type" . "s");   // errors.html en infos.html
-                    print ReplaceContentOneRow( $row, $templ );
+                    $templ = $PL->LoadTemplate("$type" . "s");   // errors.html en infos.html
+                    print $PL->ReplaceContentOneRow( $row, $templ );
                 }
 
                 unset($_SESSION["$type"]);

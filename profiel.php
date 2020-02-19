@@ -3,11 +3,11 @@ require_once "lib/autoload.php";
 if ( ! $_SESSION['usr']->getVzEid() > "" )
 {
     $MS->AddMessage("U moet uw E-id nog opladen!!!", "error");
-    $MS->AddMessage("Dit is gewoon een info bericht", "info");
+    //$MS->AddMessage("Dit is gewoon een info bericht", "info");
 }
 
 $css = array( "style.css");
-BasicHead( $css );
+$PL->BasicHead( $css );
 $MS->ShowMessages();
 ?>
 <body>
@@ -16,7 +16,7 @@ $MS->ShowMessages();
     <h1>Uw profiel</h1>
 </div>
 
-<?php PrintNavBar(); ?>
+<?php $PL->PrintNavBar(); ?>
 
 <div class="container">
 
@@ -29,7 +29,7 @@ $MS->ShowMessages();
 
             //gebruikersgegevens ophalen uit databank
             $sql = "select * from users where usr_id=" . $_SESSION["usr"]->getId();
-            $data = GetData($sql);
+            $data = $Container->getPDOData($sql);
 
             print "<table class='table table-striped table-bordered'>";
             foreach( $data as $row )
