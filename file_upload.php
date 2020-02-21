@@ -3,7 +3,7 @@ require_once "lib/autoload.php";
 
 $css = array( "style.css");
 $PL->BasicHead( $css );
-
+$MS->ShowMessages();
 ?>
 <body>
 
