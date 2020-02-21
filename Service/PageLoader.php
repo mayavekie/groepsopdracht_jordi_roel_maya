@@ -31,7 +31,6 @@ class PageLoader
 
         $data= $Container->getPDOData("select * from menu order by men_order");
 
-
         $laatste_deel_url = basename($_SERVER['SCRIPT_NAME']);
 
         //aan de juiste datarij, de sleutels 'active' en 'sr-only' toevoegen

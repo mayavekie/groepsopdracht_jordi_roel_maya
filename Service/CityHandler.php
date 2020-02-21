@@ -3,7 +3,6 @@ class CityHandler
 {
 
     private $pdo;
-    private $sql;
 
     /**
      * CityHandler constructor.
@@ -40,7 +39,7 @@ class CityHandler
     private function queryForCities($id = null){
         $pdo = $this->getPDO();
         if($id >0) {
-            $statement = $pdo->prepare('SELECT * FROM images where img_id= '.$id.'');
+            $statement = $pdo->prepare('SELECT * FROM images where img_id= '.$id );
         }else{
             $statement = $pdo->prepare('SELECT * FROM images');
         }
@@ -62,13 +61,10 @@ class CityHandler
         return $sql;
     }
 
-
-
     public function LoadCityTemplate($cityTemplate) {
         global $PL;
         $template = $PL->LoadTemplate($cityTemplate);
         $cities = $this->Load();
         print $PL->ReplaceCities( $cities, $template);
     }
-
 }
