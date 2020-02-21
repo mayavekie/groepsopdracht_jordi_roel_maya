@@ -3,58 +3,21 @@ require_once "autoload.php";
 
 if ( isset($_POST["submit"]) == "Opladen" )
 {
-    //$target_dir = de map waar de afbeeldingen uiteindelijk moet komen
-    $target_dir = "../img/";                                                          //de map waar de afbeelding uiteindelijk moet komen; relatief pad tov huidig script
-    $max_size = 5000000;                                                           //maximum grootte in bytes
-
     $images = array();
 
     //pasfoto, eid_voorzijde en eid_achterzijde overlopen
-    foreach ( $_FILES as $inputname => $fileobject )   //overloop alle bestanden in $_FILES
+    foreach ( $_FILES as $inputname => $fileobject )
     {
-        $tmp_name= $fileobject["tmp_name"];
+        $tmp_name = $fileobject["tmp_name"];
         $originele_naam = $fileobject["name"];
         $size = $fileobject["size"];
         $extensie = pathinfo($originele_naam, PATHINFO_EXTENSION);
 
         $target = "";
 
-        //CONTROLES
-        $max_size = 20000000; //maximum grootte in bytes
-        $allowed_extensions = [ "jpeg", "jpg", "png", "gif" ]; //toegelaten bestandsextensies
-        $cancel = false;
+        $US->CheckUploadProfile();
 
-        //grootte
-        if ( $size > $max_size )
-        {
-            print "Bestand " . $originele_naam . " is te groot (" . $size . " bytes). Maximum $max_size bytes!<br>";
-            $cancel = true;
-        }
-
-        //toegelaten extensies
-        if ( ! in_array( pathinfo($originele_naam, PATHINFO_EXTENSION), $allowed_extensions ))
-        {
-            print "Bestand " . $originele_naam . ": verkeerde bestandsextensie!<br>";
-            $cancel = true;
-        }
-
-        //is het bestand wel echt een afbeelding?
-        if ( getimagesize($tmp_name) === false)
-        {
-            print "Bestand " . $originele_naam . " is niet echt een afbeelding!<br>";
-            $cancel = true;
-        }
-
-        //bestaat het bestand al?
-        /* Deze controle is overbodig volgens de opgave
-        if ( file_exists($target) )
-        {
-            print "Bestand " . $originele_naam . "bestaat al!<br>";
-            $cancel = true;
-        }
-        */
-
-        if ( ! $cancel )
+        if (  $US->isReturnvalue() )
         {
             switch ( $inputname )
             {
@@ -72,25 +35,24 @@ if ( isset($_POST["submit"]) == "Opladen" )
                     break;
             }
 
-            $target = $target_dir . $target;
+            $target = $US->getTargetDir() . $target;
 
             //bestand verplaatsen naar definitieve locatie
-            print "Moving " . $inputname . " to " . $target . "<br>";
+            $MS->AddMessage("Moving " . $inputname . " to " . $target);
 
             if ( move_uploaded_file( $tmp_name, $target))
             {
-                print "Bestand $originele_naam opgeladen<br>";
+                $MS->AddMessage("Bestand $originele_naam opgeladen");
             }
-            else print "Sorry, there was an unexpected error uploading file " . $originele_naam . "<br>";
+            else $MS->AddMessage("Sorry, there was an unexpected error uploading file " . $originele_naam);
         }
     }
 
     //de afbeeldingen opslaan in het gebruikersprofiel
-    $sql = "update users SET " . implode("," , $images) . " where usr_id=" . $_SESSION['usr']->getId();
-    $Container->getPDOtoExecute($sql);
+    $US->SaveProfile();
 
     //eventueel een redirect naar de profielpagina
-    //header("Location: $_application_folder/profiel.php");
+    header("Location: $_application_folder/profiel.php");
 
 }
 ?>

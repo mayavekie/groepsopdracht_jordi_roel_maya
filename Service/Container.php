@@ -88,10 +88,10 @@ class Container
     }
 
     /**
-     * @return Upload
+     * @return UploadService
      */
-    public function getUpload(){
-        if ($this->upload === null) $this->upload = new Upload($this->getPDO());
+    public function getUploadService(){
+        if ($this->upload === null) $this->upload = new UploadService($this->getPDO());
         return $this->upload;
     }
 

@@ -9,6 +9,7 @@ $_root_folder = $_SERVER['DOCUMENT_ROOT'] . "$_application_folder";
 //load Models
 require_once $_root_folder . "/Model/City.php";
 require_once $_root_folder . "/Model/User.php";
+require_once $_root_folder . "/Model/Profile.php";
 
 //load Services
 require_once $_root_folder . "/Service/CityHandler.php";
@@ -17,15 +18,15 @@ require_once $_root_folder . "/Service/Container.php";
 require_once $_root_folder . "/Service/PageLoader.php";
 require_once $_root_folder . "/Service/Download.php";
 require_once $_root_folder . "/Service/UserLoader.php";
+require_once $_root_folder . "/Service/UploadService.php";
 
 session_start();
 $_SESSION["head_printed"] = false;
 
-
-
 require_once $_root_folder . "/lib/passwd.php";
 
 $Container = new Container($configuration);
+$US = $Container->getUploadService();
 $PL = $Container->getPageLoader();
 $MS = $Container->getMessageService();
 
