@@ -9,7 +9,7 @@ class Container
     private $messageService;
     private $pageLoader;
     private $userLoader;
-    private $upload;
+    private $uploadService;
     private $download;
 
     public function __construct(array $configuration){
@@ -91,8 +91,8 @@ class Container
      * @return UploadService
      */
     public function getUploadService(){
-        if ($this->upload === null) $this->upload = new UploadService($this->getPDO());
-        return $this->upload;
+        if ($this->uploadService === null) $this->uploadService = new UploadService($this->getPDO());
+        return $this->uploadService;
     }
 
     /**
@@ -102,5 +102,7 @@ class Container
         if($this->download === null) $this->download = new Download($this->getPDO());
         return $this->download;
     }
+
+
 
 }

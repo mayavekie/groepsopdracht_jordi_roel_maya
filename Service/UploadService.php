@@ -7,6 +7,11 @@ class UploadService
     private $max_size = 20000000;
     private $allowed_extensions = [ "jpeg", "jpg", "png", "gif" ];
     private $returnvalue = true;
+    private $pdo;
+
+    public function __construct(PDO $pdo){
+        $this->pdo = $pdo;
+    }
 
     // functies voor upload functions
 
@@ -67,6 +72,23 @@ class UploadService
             else {
                 $MS->AddMessage("Sorry, there was an unexpected error uploading file " . $upfile["name"], "error");
             }
+        }
+    }
+
+    public function ProcesFiles() {
+        //overloop alle bestanden in $_FILES
+        foreach ( $_FILES as $f )
+        {
+            $upfile = array();
+            $upfile["name"]             = basename($f["name"]);
+            $upfile["tmp_name"]         = $f["tmp_name"];
+            $upfile["target_path_name"] = $this->getTargetDir() . $upfile["name"];
+            $upfile["extension"]        = pathinfo($upfile["name"], PATHINFO_EXTENSION);
+            $upfile["getimagesize"]     = getimagesize($upfile["tmp_name"]);
+            $upfile["size"]             = $f["size"];
+
+            $result = $this->CheckUploadedFile( $upfile );
+            $this->ResponseToUpload($result, $upfile);
         }
     }
 
