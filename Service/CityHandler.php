@@ -1,8 +1,9 @@
 <?php
 class CityHandler
 {
-
     private $pdo;
+    private $city;
+    private $new_url;
 
     /**
      * CityHandler constructor.
@@ -10,8 +11,8 @@ class CityHandler
      */
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
+        $this->city = new City();
     }
-
 
     public function Load(  )
     {
@@ -66,5 +67,53 @@ class CityHandler
         $template = $PL->LoadTemplate($cityTemplate);
         $cities = $this->Load();
         print $PL->ReplaceCities( $cities, $template);
+    }
+
+    public function LoadIntoCity(){
+        $this->city->Load();
+    }
+
+    public function LoopThroughFieldAndValue(){
+
+        foreach( $_POST as $field => $value )
+        {
+            if ( in_array($field, array("tablename", "formname", "afterinsert", "pkey", "savebutton", $this->city->getPkey()))) continue;
+
+            $sql_body[]  = " $field = '" . htmlentities($value, ENT_QUOTES) . "' " ;
+            $this->city->setSqlBody($sql_body);
+        }
+    }
+
+    public function SaveCityToDatabase(){
+        global $Container;
+        global $_application_folder;
+        $pkey = $this->city->getPkey();
+
+        if ( $_POST[$this->city->getPkey()] > 0 ) //update
+        {
+            $sql = "UPDATE " . $this->city->getTablename() . " SET " . implode( ", " , $this->city->getSqlBody() ) . " WHERE $pkey=" . $_POST[$pkey];
+            if ( $Container->getPDOtoExecute($sql) ) $this->setNewUrl( $_application_folder  . "/".$this->city->getFormname().".php?id=" . $_POST[$pkey] . "&updateOK=true");
+        }
+        else //insert
+        {
+            $sql = "INSERT INTO " . $this->city->getTablename() . " SET " . implode( ", " , $this->city->getSqlBody() );
+            if ( $Container->getPDOtoExecute($sql) ) $this->setNewUrl($_application_folder . "/".$this->city->getAfterinsert()."?insertOK=true");
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewUrl()
+    {
+        return $this->new_url;
+    }
+
+    /**
+     * @param mixed $new_url
+     */
+    public function setNewUrl($new_url)
+    {
+        $this->new_url = $new_url;
     }
 }

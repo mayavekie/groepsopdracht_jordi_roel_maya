@@ -30,7 +30,6 @@ $US = $Container->getUploadService();
 $PL = $Container->getPageLoader();
 $MS = $Container->getMessageService();
 
-
 //redirect naar NO ACCESS pagina als de gebruiker niet ingelogd is en niet naar
 //de loginpagina gaat
 if ( ! isset($_SESSION['usr']) AND ! $login_form AND ! $register_form AND ! $no_access)
