@@ -2,7 +2,7 @@
 require_once "lib/autoload.php";
 
 $css = array( "style.css");
-BasicHead( $css );
+$PL->BasicHead( $css );
 ?>
 <body>
 
@@ -14,9 +14,8 @@ BasicHead( $css );
     <div class="row">
 
         <?php
-        $container = new Container($configuration);
-        $cityHandler = $container->getCityHandler();
-        $cityHandler->LoadCityTemplate("stad", $_GET['id']);
+        $cityHandler = $Container->getCityHandler();
+        $cityHandler->LoadCityTemplate("stad");
         ?>
 
     </div>

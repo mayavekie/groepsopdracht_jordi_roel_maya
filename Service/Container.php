@@ -7,12 +7,21 @@ class Container
     private $pdo;
     private $cityhandler;
     private $messageService;
+    private $pageLoader;
     private $userLoader;
-    private $upload;
+    private $uploadService;
     private $download;
 
     public function __construct(array $configuration){
         $this->configuration = $configuration;
+    }
+
+    public function getPageLoader(){
+        if ($this->pageLoader === null){
+            $this->pageLoader = new PageLoader();
+        }
+
+        return $this->pageLoader;
     }
 
     /**
@@ -28,6 +37,30 @@ class Container
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         return $this->pdo;
+    }
+
+
+    public function getPDOData($sql){
+        $pdo = $this->getPDO();
+
+        $stm = $pdo->prepare($sql);
+        $stm->execute();
+
+        $rows = $stm->fetchAll(PDO::FETCH_ASSOC);
+        return $rows;
+    }
+
+    /**
+     * @param $sql
+     * @return bool
+     */
+    public function getPDOtoExecute($sql){
+        $pdo = $this->getPDO();
+
+        $stm = $pdo->prepare($sql);
+
+        if ( $stm->execute() ) return true;
+        else return false;
     }
 
     /**
@@ -55,11 +88,11 @@ class Container
     }
 
     /**
-     * @return Upload
+     * @return UploadService
      */
-    public function getUpload(){
-        if ($this->upload === null) $this->upload = new Upload($this->getPDO());
-        return $this->upload;
+    public function getUploadService(){
+        if ($this->uploadService === null) $this->uploadService = new UploadService($this->getPDO());
+        return $this->uploadService;
     }
 
     /**
@@ -69,5 +102,7 @@ class Container
         if($this->download === null) $this->download = new Download($this->getPDO());
         return $this->download;
     }
+
+
 
 }
