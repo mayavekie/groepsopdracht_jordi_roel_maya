@@ -3,7 +3,9 @@ class CityHandler
 {
     private $pdo;
     private $city;
-    private $new_url;
+    private $pageloader;
+    private $messageService;
+
 
     /**
      * CityHandler constructor.
@@ -12,6 +14,8 @@ class CityHandler
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
         $this->city = new City();
+        $this->pageloader = new PageLoader();
+        $this->messageService = new MessageService();
     }
 
     public function Load(  )
@@ -63,10 +67,9 @@ class CityHandler
     }
 
     public function LoadCityTemplate($cityTemplate) {
-        global $PL;
-        $template = $PL->LoadTemplate($cityTemplate);
+        $template = $this->pageloader->LoadTemplate($cityTemplate);
         $cities = $this->Load();
-        print $PL->ReplaceCities( $cities, $template);
+        print $this->pageloader->ReplaceCities( $cities, $template);
     }
 
     public function LoadIntoCity(){
@@ -85,35 +88,34 @@ class CityHandler
     }
 
     public function SaveCityToDatabase(){
-        global $Container;
         global $_application_folder;
+        global $Container;
+
         $pkey = $this->city->getPkey();
 
         if ( $_POST[$this->city->getPkey()] > 0 ) //update
         {
             $sql = "UPDATE " . $this->city->getTablename() . " SET " . implode( ", " , $this->city->getSqlBody() ) . " WHERE $pkey=" . $_POST[$pkey];
-            if ( $Container->getPDOtoExecute($sql) ) $this->setNewUrl( $_application_folder  . "/".$this->city->getFormname().".php?id=" . $_POST[$pkey] . "&updateOK=true");
+            if ( $Container->getPDOtoExecute($sql) ) {
+                $this->city->setNewUrl( $_application_folder  . "/".$this->city->getFormname().".php?id=" . $_POST[$pkey] . "&updateOK=true");
+                $this->messageService->AddMessage('Changes saved to database');
+            }
+            else $this->messageService->AddMessage('Changes not saved to database', 'error');
         }
         else //insert
         {
             $sql = "INSERT INTO " . $this->city->getTablename() . " SET " . implode( ", " , $this->city->getSqlBody() );
-            if ( $Container->getPDOtoExecute($sql) ) $this->setNewUrl($_application_folder . "/".$this->city->getAfterinsert()."?insertOK=true");
+            if ( $Container->getPDOtoExecute($sql) ) {
+                $this->city->setNewUrl($_application_folder . "/".$this->city->getAfterinsert()."?insertOK=true");
+                $this->messageService->AddMessage('City saved to database');
+            }
+            else $this->messageService->AddMessage('City saved to database', 'error');
         }
     }
 
-    /**
-     * @return mixed
-     */
-    public function getNewUrl()
-    {
-        return $this->new_url;
+    public function GetNewUrlFromCity(){
+        $new_url = $this->city->getNewUrl();
+        return $new_url;
     }
 
-    /**
-     * @param mixed $new_url
-     */
-    public function setNewUrl($new_url)
-    {
-        $this->new_url = $new_url;
-    }
 }

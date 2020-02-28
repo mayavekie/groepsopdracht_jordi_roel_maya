@@ -11,12 +11,29 @@ class City
     private $formname;
     private $afterinsert;
     private $pkey;
+    private $new_url;
 
     public function Load(){
         $this->tablename = $_POST["tablename"];
         $this->formname = $_POST["formname"];
         $this->afterinsert = $_POST["afterinsert"];
         $this->pkey = $_POST["pkey"];
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNewUrl()
+    {
+        return $this->new_url;
+    }
+
+    /**
+     * @param mixed $new_url
+     */
+    public function setNewUrl($new_url)
+    {
+        $this->new_url = $new_url;
     }
 
     /**
