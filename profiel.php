@@ -23,14 +23,13 @@ $MS->ShowMessages();
 
         <div class="col-sm-5">
             <?php
-            $profile = new Profile();
-            $profile->GetUserDataFromDatabase();
+            $PS->GetUserDataFromDatabase();
             ?>
         </div> <!-- col-sm-5 -->
 
         <div class="col-sm-7">
             <?php
-            $images = $profile->getImages();
+            $images = $PS->GetProfileImages();
             $template = $PL->LoadTemplate("profiel");
             print $PL->ReplaceContent( $images, $template);
             ?>
