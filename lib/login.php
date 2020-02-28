@@ -31,7 +31,3 @@ else
 }
 ?>
 
-/*$container = new Container($configuration);
-$userLoader = $container->getUserLoader();
-$userLoader->LogLogoutUser();
-*/

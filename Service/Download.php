@@ -22,12 +22,12 @@ class Download
 
 
     public function getTaskData(){
-
+        global $Container;
         //veldnamenrij
         echo implode(";", array("ID", "Datum", "Taak")) . "\r\n" ;
 
         $sql = "SELECT * FROM taak" ;
-        $data = GetData($sql);
+        $data = $Container->getPDOData($sql);
 
         //rijen met data
         foreach( $data as $row )

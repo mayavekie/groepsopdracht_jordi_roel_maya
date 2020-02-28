@@ -4,13 +4,17 @@
 class UserLoader
 {
 
+
     public function CheckLogin()
     {
         $user = new User();
+        global $Container;
 
         //gebruiker opzoeken ahv zijn login (e-mail)
         $sql = "SELECT * FROM users WHERE usr_login='" . $user->getId(). "' ";
-        $data = GetData($sql);
+        var_dump($user->getId()); die;
+        $data = $Container->getPDOData($sql);
+
         if ( count($data) == 1 )
         {
             $row = $data[0];
@@ -33,27 +37,31 @@ class UserLoader
 
     public function LogLoginUser()
     {
+        global $Container;
         $session = session_id();
         $timenow = new DateTime( 'NOW', new DateTimeZone('Europe/Brussels') );
         $now = $timenow->format('Y-m-d H:i:s') ;
         $sql = "INSERT INTO log_user SET log_usr_id=".$this->id.", log_session_id='".$session."', log_in= '".$now."'";
-        ExecuteSQL($sql);
+        $Container->getPDOtoExecute($sql);
     }
 
     public function LogLogoutUser()
     {
+        global $Container;
+
         $session = session_id();
         $timenow = new DateTime( 'NOW', new DateTimeZone('Europe/Brussels') );
         $now = $timenow->format('Y-m-d H:i:s') ;
         $sql = "UPDATE log_user SET  log_out='".$now."' where log_session_id='".$session."'";
-        ExecuteSQL($sql);
+        $Container->getPDOtoExecute($sql);
     }
 
     public function CheckIfUserExistsAlready()
     {
+        global $Container;
         //controle of gebruiker al bestaat
         $sql = "SELECT * FROM users WHERE usr_login='" . $_POST['usr_login'] . "' ";
-        $data = GetData($sql);
+        $data = $Container->getPDOData($sql);
         if ( count($data) > 0 ) die("Deze gebruiker bestaat reeds! Gelieve een andere login te gebruiken.");
     }
 
@@ -70,6 +78,7 @@ class UserLoader
 
     public function RegisterUser()
     {
+        global $Container;
         global $tablename;
         global $_application_folder;
         global $MS;
@@ -89,7 +98,7 @@ class UserLoader
             " usr_login='" . $_POST['usr_login'] . "' , " .
             " usr_paswd='" . $password_encrypted . "'  " ;
 
-        if ( ExecuteSQL($sql) )
+        if ( $Container->getPDOtoExecute($sql) )
         {
             $MS->AddMessage( "Bedankt voor uw registratie!" );
 
