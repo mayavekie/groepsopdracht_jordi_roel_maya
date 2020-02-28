@@ -11,7 +11,10 @@ if ( $formname == "login_form" AND $buttonvalue == "Log in" )
     $User->setLogin($_POST['usr_login']);
     $User->setPaswd($_POST['usr_paswd']);
 
-    if ( $User->CheckLogin() )
+    $container= new container($configuration);
+    $userLoader = $container->getUserLoader();
+
+    if ($userLoader->CheckLogin() )
     {
         $MS->AddMessage( "Welkom, " . $_SESSION['usr']->getVoornaam() . "!" );
         header("Location: " . $_application_folder . "/steden.php");
@@ -27,3 +30,8 @@ else
     $MS->AddMessage( "Foute formname of buttonvalue", "error" );
 }
 ?>
+
+/*$container = new Container($configuration);
+$userLoader = $container->getUserLoader();
+$userLoader->LogLogoutUser();
+*/
