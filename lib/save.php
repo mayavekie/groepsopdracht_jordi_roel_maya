@@ -7,7 +7,7 @@ if ( $_POST["savebutton"] == "Save" )
     $cityHandler->LoadIntoCity();
     $cityHandler->LoopThroughFieldAndValue();
     $cityHandler->SaveCityToDatabase();
-    $new_url = $cityHandler->getNewUrl();
+    $new_url = $cityHandler->GetNewUrlFromCity();
 
-    header("Location: $new_url");
+    header("Location: " . $cityHandler->GetNewUrlFromCity());
 }

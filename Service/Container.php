@@ -11,6 +11,7 @@ class Container
     private $userLoader;
     private $uploadService;
     private $download;
+    private $profileService;
 
     public function __construct(array $configuration){
         $this->configuration = $configuration;
@@ -102,6 +103,17 @@ class Container
         if($this->download === null) $this->download = new Download($this->getPDO());
         return $this->download;
     }
+
+    /**
+     * @return ProfileService
+     */
+    public function getProfileService()
+    {
+        if($this->profileService === null ) $this->profileService = new ProfileService($this->getPDO());
+        return $this->profileService;
+    }
+
+
 
 
 
