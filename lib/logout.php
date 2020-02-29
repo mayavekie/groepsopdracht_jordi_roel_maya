@@ -1,8 +1,7 @@
 <?php
 require_once "autoload.php";
 
-
-$userLoader = $container->getUserLoader();
+$userLoader = $Container->getUserLoader();
 $userLoader->LogLogoutUser();
 
 session_destroy();

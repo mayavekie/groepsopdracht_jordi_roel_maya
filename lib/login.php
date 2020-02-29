@@ -7,11 +7,7 @@ $buttonvalue = $_POST['loginbutton'];
 
 if ( $formname == "login_form" AND $buttonvalue == "Log in" )
 {
-    $User = new User();
-    $User->setLogin($_POST['usr_login']);
-    $User->setPaswd($_POST['usr_paswd']);
-
-
+    $user = new User();
     $userLoader = $Container->getUserLoader();
 
     if ($userLoader->CheckLogin() )

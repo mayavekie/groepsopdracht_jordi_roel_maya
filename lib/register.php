@@ -9,7 +9,7 @@ $pkey = $_POST["pkey"];
 if ( $formname == "registration_form" AND $_POST['registerbutton'] == "Register" )
 {
 
-    $userLoader = $container->getUserLoader();
+    $userLoader = $Container->getUserLoader();
     $userLoader->ValidatePostedUserData();
     $userLoader->RegisterUser();
 }

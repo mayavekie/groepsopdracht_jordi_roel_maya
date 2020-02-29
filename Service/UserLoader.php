@@ -6,6 +6,7 @@ class UserLoader
     private $pdo;
     private $user;
     private $messageService;
+    private $id;
 
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
@@ -32,27 +33,16 @@ class UserLoader
     }
 
 
-
-   /* public function checkIfUserIsInDatabase($userLogin)
-    {
-        //controle of gebruiker al bestaat
-        $data = $this->databaseService->getData("SELECT * FROM users WHERE usr_login='" . $userLogin . "' ");
-        $userIsInDatabase = (count($data) > 0) ? true : false;
-        return $userIsInDatabase;
-
-//        $sql = "SELECT * FROM users WHERE usr_login='" . $userLogin . "' ";
-//        $data = GetData($sql);
-
-
-    }*/
-
     public function CheckLogin()
     {
         global $Container;
 
+
+        $this->user->setLogin($_POST['usr_login']);
+        $this->user->setPaswd($_POST['usr_paswd']);
+
         //gebruiker opzoeken ahv zijn login (e-mail)
         $sql = "SELECT * FROM users WHERE usr_login='" . $this->user->getLogin(). "' ";
-        var_dump($sql);die;
         $data = $Container->getPDOData($sql);
 
         if ( count($data) == 1 )
@@ -64,7 +54,7 @@ class UserLoader
 
         if ( $login_ok )
         {
-            session_start();
+
             $this->Load($row);
             $_SESSION['usr'] = $this;
             $this->LogLoginUser();
@@ -81,7 +71,7 @@ class UserLoader
         $session = session_id();
         $timenow = new DateTime( 'NOW', new DateTimeZone('Europe/Brussels') );
         $now = $timenow->format('Y-m-d H:i:s') ;
-        $sql = "INSERT INTO log_user SET log_usr_id=".$this->id.", log_session_id='".$session."', log_in= '".$now."'";
+        $sql = "INSERT INTO log_user SET log_usr_id='".$this->user->getId()."', log_session_id='".$session."', log_in= '".$now."'";
         $Container->getPDOtoExecute($sql);
     }
 
