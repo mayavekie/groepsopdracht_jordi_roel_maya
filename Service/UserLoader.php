@@ -6,7 +6,7 @@ class UserLoader
     private $pdo;
     private $user;
     private $messageService;
-    private $id;
+
 
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
@@ -152,4 +152,28 @@ class UserLoader
             $this->messageService->AddMessage( "Sorry, er liep iets fout. Uw gegevens werden niet goed opgeslagen", "error" ) ;
         }
     }
+
+    public function getHistoriekUser(){
+        $this->user->getVoornaam();
+        var_dump($this->user->getVoornaam());
+        $this->user->getNaam();
+    }
+
+    public function Historiek(){
+        global $Container;
+
+        $sql = "SELECT * FROM log_user WHERE log_usr_id='" . $this->user->getId() . "' ORDER BY log_in" ;
+        $data = $Container->getPDOData($sql);
+
+
+        foreach( $data as $row )
+        {
+            echo "<tr>";
+            echo "<td>" . $row['log_in'] . "</td>";
+            echo "<td>" . $row['log_out'] . "</td>";
+            echo "</tr>" ;
+        }
+    }
+
+
 }

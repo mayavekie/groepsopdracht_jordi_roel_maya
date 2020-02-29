@@ -15,9 +15,12 @@ $PL->BasicHead($css);
         <div class="row">
 
             <p>Gebruiker: <?php
-                $user = new User();
-                $_SESSION['usr']->getVoornaam();
-                $_SESSION['usr']->getNaam() ?>
+
+            $userLoader = $Container->getUserLoader();
+            $userLoader->getHistoriekUser();
+
+
+                ?>
             </p>
             <table class="table">
                 <tr>
@@ -25,16 +28,10 @@ $PL->BasicHead($css);
                     <th>Uitloggen</th>
                 </tr>
                     <?php
-                        $sql = "SELECT * FROM log_user WHERE log_usr_id=" . $_SESSION['usr']->getId() . " ORDER BY log_in" ;
-                        $data = $Container->getPDOData($sql);
 
-                        foreach( $data as $row )
-                        {
-                            echo "<tr>";
-                            echo "<td>" . $row['log_in'] . "</td>";
-                            echo "<td>" . $row['log_out'] . "</td>";
-                            echo "</tr>" ;
-                        }
+                        $userLoader = $Container->getUserLoader();
+                        $userLoader->Historiek();
+
                     ?>
             </table>
 

@@ -73,6 +73,7 @@ class ProfileService
 
     public function GetUserDataFromDatabase(){
         global $Container;
+        //$user = new User();
 
         //gebruikersgegevens ophalen uit databank
         $sql = "select * from users where usr_id=" . $_SESSION["usr"]->getId();
