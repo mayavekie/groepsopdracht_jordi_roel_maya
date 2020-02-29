@@ -14,7 +14,11 @@ $PL->BasicHead($css);
     <div class="container">
         <div class="row">
 
-            <p>Gebruiker: <?= $_SESSION['usr']->getVoornaam() ?> <?=$_SESSION['usr']->getNaam() ?></p>
+            <p>Gebruiker: <?php
+                $user = new User();
+                $_SESSION['usr']->getVoornaam();
+                $_SESSION['usr']->getNaam() ?>
+            </p>
             <table class="table">
                 <tr>
                     <th>Inloggen</th>
