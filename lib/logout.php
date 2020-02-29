@@ -1,7 +1,7 @@
 <?php
 require_once "autoload.php";
 
-$container = new Container($configuration);
+
 $userLoader = $container->getUserLoader();
 $userLoader->LogLogoutUser();
 

@@ -3,6 +3,10 @@
 
 class UserLoader
 {
+    private $pdo;
+    private $user;
+    private $messageService;
+
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
         $this->user = new User();
@@ -11,8 +15,6 @@ class UserLoader
 
     private function Load( $row )
     {
-
-
         $this->user->setId( $row['usr_id']);
         $this->user->setVoornaam( $row['usr_voornaam'] );
         $this->user->setNaam($row['usr_naam']);
@@ -29,22 +31,29 @@ class UserLoader
         $this->user->setAzEid( $row['usr_az_eid']);
     }
 
-    private function getPDO(){
-        return $this->pdo;
-    }
 
-    public function getPDOData($sql){
-        $this->pdo = $sql;
-        return $sql;
-    }
 
+   /* public function checkIfUserIsInDatabase($userLogin)
+    {
+        //controle of gebruiker al bestaat
+        $data = $this->databaseService->getData("SELECT * FROM users WHERE usr_login='" . $userLogin . "' ");
+        $userIsInDatabase = (count($data) > 0) ? true : false;
+        return $userIsInDatabase;
+
+//        $sql = "SELECT * FROM users WHERE usr_login='" . $userLogin . "' ";
+//        $data = GetData($sql);
+
+
+    }*/
 
     public function CheckLogin()
     {
-        //gebruiker opzoeken ahv zijn login (e-mail)
-        $sql = "SELECT * FROM users WHERE usr_login='" . $this->user->getId(). "' ";
+        global $Container;
 
-        $data = $this->getPDOData($sql);
+        //gebruiker opzoeken ahv zijn login (e-mail)
+        $sql = "SELECT * FROM users WHERE usr_login='" . $this->user->getLogin(). "' ";
+        var_dump($sql);die;
+        $data = $Container->getPDOData($sql);
 
         if ( count($data) == 1 )
         {
@@ -89,10 +98,11 @@ class UserLoader
 
     public function CheckIfUserExistsAlready()
     {
+        global $Container;
 
         //controle of gebruiker al bestaat
         $sql = "SELECT * FROM users WHERE usr_login='" . $_POST['usr_login'] . "' ";
-        $data = $this->getPDOData($sql);
+        $data = $Container->getPDOData($sql);
         if ( count($data) > 0 ) die("Deze gebruiker bestaat reeds! Gelieve een andere login te gebruiken.");
     }
 

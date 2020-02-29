@@ -11,8 +11,8 @@ if ( $formname == "login_form" AND $buttonvalue == "Log in" )
     $User->setLogin($_POST['usr_login']);
     $User->setPaswd($_POST['usr_paswd']);
 
-    $container= new container($configuration);
-    $userLoader = $container->getUserLoader();
+
+    $userLoader = $Container->getUserLoader();
 
     if ($userLoader->CheckLogin() )
     {
@@ -30,4 +30,6 @@ else
     $MS->AddMessage( "Foute formname of buttonvalue", "error" );
 }
 ?>
+
+
 
