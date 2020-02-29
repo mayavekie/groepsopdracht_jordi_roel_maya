@@ -3,23 +3,54 @@
 
 class UserLoader
 {
+    public function __construct(PDO $pdo){
+        $this->pdo = $pdo;
+        $this->user = new User();
+        $this->messageService = new MessageService();
+    }
+
+    private function Load( $row )
+    {
+
+
+        $this->user->setId( $row['usr_id']);
+        $this->user->setVoornaam( $row['usr_voornaam'] );
+        $this->user->setNaam($row['usr_naam']);
+        $this->user->setLogin($row['usr_login']);
+        $this->user->setPaswd($row['usr_paswd']);
+        $this->user->setStraat($row['usr_straat']);
+        $this->user->setHuisnr( $row['usr_huisnr']);
+        $this->user->setBusnr( $row['usr_busnr']);
+        $this->user->setPostcode( $row['usr_postcode']);
+        $this->user->setGemeente( $row['usr_gemeente']);
+        $this->user->setTelefoon( $row['usr_telefoon']);
+        $this->user->setPasfoto($row['usr_pasfoto']);
+        $this->user->setVzEid( $row['usr_vz_eid']);
+        $this->user->setAzEid( $row['usr_az_eid']);
+    }
+
+    private function getPDO(){
+        return $this->pdo;
+    }
+
+    public function getPDOData($sql){
+        $this->pdo = $sql;
+        return $sql;
+    }
 
 
     public function CheckLogin()
     {
-        $user = new User();
-        global $Container;
-
         //gebruiker opzoeken ahv zijn login (e-mail)
-        $sql = "SELECT * FROM users WHERE usr_login='" . $user->getId(). "' ";
-        var_dump($user->getId()); die;
-        $data = $Container->getPDOData($sql);
+        $sql = "SELECT * FROM users WHERE usr_login='" . $this->user->getId(). "' ";
+
+        $data = $this->getPDOData($sql);
 
         if ( count($data) == 1 )
         {
             $row = $data[0];
             //password controleren
-            if ( password_verify( $user->getPaswd(), $row['usr_paswd'] ) ) $login_ok = true;
+            if ( password_verify( $this->user->getPaswd(), $row['usr_paswd'] ) ) $login_ok = true;
         }
 
         if ( $login_ok )
@@ -58,10 +89,10 @@ class UserLoader
 
     public function CheckIfUserExistsAlready()
     {
-        global $Container;
+
         //controle of gebruiker al bestaat
         $sql = "SELECT * FROM users WHERE usr_login='" . $_POST['usr_login'] . "' ";
-        $data = $Container->getPDOData($sql);
+        $data = $this->getPDOData($sql);
         if ( count($data) > 0 ) die("Deze gebruiker bestaat reeds! Gelieve een andere login te gebruiken.");
     }
 
@@ -81,7 +112,7 @@ class UserLoader
         global $Container;
         global $tablename;
         global $_application_folder;
-        global $MS;
+
 
         //wachtwoord coderen
         $password_encrypted = password_hash ( $_POST["usr_paswd"] , PASSWORD_DEFAULT );
@@ -100,10 +131,11 @@ class UserLoader
 
         if ( $Container->getPDOtoExecute($sql) )
         {
-            $MS->AddMessage( "Bedankt voor uw registratie!" );
 
-            $this->setLogin($_POST['usr_login']);
-            $this->setPaswd($_POST['usr_paswd']);
+            $this->messageService->AddMessage( "Bedankt voor uw registratie!" );
+
+            $this->user->setLogin($_POST['usr_login']);
+            $this->user->setPaswd($_POST['usr_paswd']);
 
             if ( $this->CheckLogin() )
             {
@@ -111,13 +143,13 @@ class UserLoader
             }
             else
             {
-                $MS->AddMessage( "Sorry! Verkeerde login of wachtwoord na registratie!", "error" );
+                $this->messageService->AddMessage( "Sorry! Verkeerde login of wachtwoord na registratie!", "error" );
                 header("Location: " . $_application_folder . "/login.php");
             }
         }
         else
         {
-            $MS->AddMessage( "Sorry, er liep iets fout. Uw gegevens werden niet goed opgeslagen", "error" ) ;
+            $this->messageService->AddMessage( "Sorry, er liep iets fout. Uw gegevens werden niet goed opgeslagen", "error" ) ;
         }
     }
 }
