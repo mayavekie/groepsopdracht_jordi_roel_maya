@@ -64,13 +64,7 @@ class User
         $this->naam = $naam;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLogin()
-    {
-        return $this->login;
-    }
+
 
     /**
      * @param mixed $login
@@ -80,6 +74,13 @@ class User
         $this->login = $login;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
     /**
      * @return mixed
      */

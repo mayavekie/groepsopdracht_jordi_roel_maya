@@ -16,6 +16,7 @@ class CityHandler
         $this->city = new City();
         $this->pageloader = new PageLoader();
         $this->messageService = new MessageService();
+
     }
 
     public function Load(  )
@@ -25,6 +26,7 @@ class CityHandler
         $sql = $this->queryForCities($id = $_GET['id']);
 
         $data = $this->getPDOData($sql);
+
         foreach ($data as $row)
         {
             $city = new City();

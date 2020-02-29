@@ -1,7 +1,7 @@
 <?php
-//ini_set("error_reporting", E_ALL);
-//ini_set("display_errors", 1);
-//ini_set("display_startup_errors", 1);
+ini_set("error_reporting", E_ALL);
+ini_set("display_errors", 1);
+ini_set("display_startup_errors", 1);
 
 $_application_folder = "/groepswerken/groepswerk_di";
 $_root_folder = $_SERVER['DOCUMENT_ROOT'] . "$_application_folder";
@@ -32,6 +32,7 @@ $PS = $Container->getProfileService();
 $US = $Container->getUploadService();
 $PL = $Container->getPageLoader();
 $MS = $Container->getMessageService();
+$LS = $Container->getUserLoader();
 
 
 //redirect naar NO ACCESS pagina als de gebruiker niet ingelogd is en niet naar

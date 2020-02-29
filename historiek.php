@@ -15,7 +15,6 @@ $PL->BasicHead($css);
         <div class="row">
 
             <p>Gebruiker: <?php
-
             $userLoader = $Container->getUserLoader();
             $userLoader->getHistoriekUser();
 
@@ -28,8 +27,6 @@ $PL->BasicHead($css);
                     <th>Uitloggen</th>
                 </tr>
                     <?php
-
-                        $userLoader = $Container->getUserLoader();
                         $userLoader->Historiek();
 
                     ?>

@@ -12,7 +12,7 @@ if ( $formname == "login_form" AND $buttonvalue == "Log in" )
 
     if ($userLoader->CheckLogin() )
     {
-        $MS->AddMessage( "Welkom, " .$user->getVoornaam() . "!" );
+        $MS->AddMessage( "Welkom, " .$_SESSION['data'][0]['usr_voornaam'] ." ". $_SESSION['data'][0]['usr_naam']. "!" );
         header("Location: " . $_application_folder . "/steden.php");
     }
     else

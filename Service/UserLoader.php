@@ -14,7 +14,7 @@ class UserLoader
         $this->messageService = new MessageService();
     }
 
-    private function Load( $row )
+    public function Load( $row )
     {
         $this->user->setId( $row['usr_id']);
         $this->user->setVoornaam( $row['usr_voornaam'] );
@@ -31,6 +31,7 @@ class UserLoader
         $this->user->setVzEid( $row['usr_vz_eid']);
         $this->user->setAzEid( $row['usr_az_eid']);
     }
+
 
 
     public function CheckLogin()
@@ -54,9 +55,10 @@ class UserLoader
 
         if ( $login_ok )
         {
-
+            session_start();
             $this->Load($row);
-            $_SESSION['usr'] = $this;
+            $_SESSION['data'] = $data;
+//            var_dump( $_SESSION['data']);die;
             $this->LogLoginUser();
             return true;
         }
@@ -154,15 +156,15 @@ class UserLoader
     }
 
     public function getHistoriekUser(){
-        $this->user->getVoornaam();
-        var_dump($this->user->getVoornaam());
-        $this->user->getNaam();
+        echo  $_SESSION['data'][0]['usr_voornaam'] ." ". $_SESSION['data'][0]['usr_naam'];
+
+
     }
 
     public function Historiek(){
         global $Container;
 
-        $sql = "SELECT * FROM log_user WHERE log_usr_id='" . $this->user->getId() . "' ORDER BY log_in" ;
+        $sql = "SELECT * FROM log_user WHERE log_usr_id='" .  $_SESSION['data'][0]['usr_id'] . "' ORDER BY log_in" ;
         $data = $Container->getPDOData($sql);
 
 
