@@ -37,9 +37,9 @@ $LS = $Container->getUserLoader();
 
 //redirect naar NO ACCESS pagina als de gebruiker niet ingelogd is en niet naar
 //de loginpagina gaat
-/*if ( ! isset($_SESSION['usr']) AND ! $login_form AND ! $register_form AND ! $no_access)
+if ( ! isset($_SESSION['data']) AND ! $login_form AND ! $register_form AND ! $no_access)
 {
     header("Location: " . $_application_folder . "/no_access.php");
-}*/
+}
 
 
