@@ -32,6 +32,38 @@ class UserLoader
         $this->user->setAzEid( $row['usr_az_eid']);
     }
 
+    public function Login(){
+        $formname = $_POST["formname"];
+        $buttonvalue = $_POST['loginbutton'];
+
+        global $Container;
+        global $_application_folder;
+
+        $this->user->setVoornaam($_SESSION['data'][0]['usr_voornaam']);
+        $this->user->setNaam( $_SESSION['data'][0]['usr_naam']);
+
+        if ( $formname == "login_form" AND $buttonvalue == "Log in" )
+        {
+
+            $userLoader = $Container->getUserLoader();
+
+            if ($userLoader->CheckLogin() )
+            {
+                $this->messageService->AddMessage( "Welkom, " .$this->user->getVoornaam() ." ". $this->user->getNaam(). "!" );
+                header("Location: " . $_application_folder . "/steden.php");
+            }
+            else
+            {
+                $this->messageService->AddMessage( "Sorry! Verkeerde login of wachtwoord!", "error" );
+                header("Location: " . $_application_folder . "/login.php");
+            }
+        }
+        else
+        {
+            $this->messageService->AddMessage( "Foute formname of buttonvalue", "error" );
+        }
+    }
+
 
 
     public function CheckLogin()
@@ -156,15 +188,18 @@ class UserLoader
     }
 
     public function getHistoriekUser(){
-        echo  $_SESSION['data'][0]['usr_voornaam'] ." ". $_SESSION['data'][0]['usr_naam'];
+        $this->user->setVoornaam($_SESSION['data'][0]['usr_voornaam']);
+        $this->user->setNaam( $_SESSION['data'][0]['usr_naam']);
+        print $this->user->getVoornaam() . " " .$this->user->getNaam();
 
 
     }
 
     public function Historiek(){
         global $Container;
+        $this->user->setId($_SESSION['data'][0]['usr_id']);
 
-        $sql = "SELECT * FROM log_user WHERE log_usr_id='" .  $_SESSION['data'][0]['usr_id'] . "' ORDER BY log_in" ;
+        $sql = "SELECT * FROM log_user WHERE log_usr_id='" .  $this->user->getId() . "' ORDER BY log_in" ;
         $data = $Container->getPDOData($sql);
 
 
@@ -176,6 +211,4 @@ class UserLoader
             echo "</tr>" ;
         }
     }
-
-
 }

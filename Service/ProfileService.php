@@ -6,11 +6,14 @@ class ProfileService
     private $pdo;
     private $profile;
     private $messageService;
+    private $user;
 
     public function __construct(PDO $pdo){
         $this->pdo = $pdo;
         $this->profile = new Profile();
         $this->messageService = new MessageService();
+        $this->user = new User();
+
     }
 
     public function CheckUploadProfile(){
@@ -57,6 +60,7 @@ class ProfileService
 
     public function SaveProfile() {
         global $Container;
+        $this->user->setId($_SESSION['data'][0]['usr_id']);
 
         $images = $this->profile->getImages();
         $imagesql = "";
@@ -66,17 +70,20 @@ class ProfileService
         }
         $imagesql = substr($imagesql, 0, strlen($imagesql)-1);
 
-        $sql = "update users SET " . $imagesql . " where usr_id=" . $_SESSION['usr']->getId();
+        $sql = "update users SET " . $imagesql . " where usr_id=" . $this->user->getId();
 
         $Container->getPDOtoExecute($sql);
     }
 
     public function GetUserDataFromDatabase(){
         global $Container;
-        //$user = new User();
+
+        $this->user->setId($_SESSION['data'][0]['usr_id']);
+
 
         //gebruikersgegevens ophalen uit databank
-        $sql = "select * from users where usr_id=" . $_SESSION["usr"]->getId();
+        $sql = "select * from users where usr_id=" .$this->user->getId();
+
         $data = $Container->getPDOData($sql);
 
         print "<table class='table table-striped table-bordered'>";
@@ -113,6 +120,9 @@ class ProfileService
 
     public function ProcessUpload(){
         //pasfoto, eid_voorzijde en eid_achterzijde overlopen
+
+        $this->user->setId($_SESSION['data'][0]['usr_id']);
+
         foreach ( $_FILES as $inputname => $fileobject )
         {
             $this->profile->LoadImageInfo($fileobject);
@@ -123,15 +133,15 @@ class ProfileService
                 switch ( $inputname )
                 {
                     case "pasfoto":
-                        $this->profile->setTarget("pasfoto_" . $_SESSION['usr']->getId() . "." . $this->profile->getExtensie());
+                        $this->profile->setTarget("pasfoto_" . $this->user->getId() . "." . $this->profile->getExtensie());
                         $this->profile->setImgPasfoto($this->profile->getTarget());
                         break;
                     case "eidvoor":
-                        $this->profile->setTarget("eidvoor_" . $_SESSION['usr']->getId() . "." . $this->profile->getExtensie());
+                        $this->profile->setTarget("eidvoor_" . $this->user->getId() . "." . $this->profile->getExtensie());
                         $this->profile->setImgVzEid($this->profile->getTarget());
                         break;
                     case "eidachter":
-                        $this->profile->setTarget("eidachter_" . $_SESSION['usr']->getId() . "." . $this->profile->getExtensie());
+                        $this->profile->setTarget("eidachter_" . $this->user->getId() . "." . $this->profile->getExtensie());
                         $this->profile->setImgAzEid($this->profile->getTarget());
                         break;
                 }

@@ -241,7 +241,23 @@ class User
         $this->az_eid = $az_eid;
     }
 
-
+    public function Load( $row )
+    {
+        $this->setId( $row['usr_id']);
+        $this->setVoornaam( $row['usr_voornaam'] );
+        $this->setNaam($row['usr_naam']);
+        $this->setLogin($row['usr_login']);
+        $this->setPaswd($row['usr_paswd']);
+        $this->setStraat($row['usr_straat']);
+        $this->setHuisnr( $row['usr_huisnr']);
+        $this->setBusnr( $row['usr_busnr']);
+        $this->setPostcode( $row['usr_postcode']);
+        $this->setGemeente( $row['usr_gemeente']);
+        $this->setTelefoon( $row['usr_telefoon']);
+        $this->setPasfoto($row['usr_pasfoto']);
+        $this->setVzEid( $row['usr_vz_eid']);
+        $this->setAzEid( $row['usr_az_eid']);
+    }
 
 
 }
