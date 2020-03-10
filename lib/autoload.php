@@ -11,11 +11,11 @@ require_once $_root_folder . "/Model/Places.php";
 require_once $_root_folder . "/Model/Countries.php";
 require_once $_root_folder . "/Model/City.php";
 require_once $_root_folder . "/Model/User.php";
-require_once $_root_folder . "/Model/Upload.php";
 require_once $_root_folder . "/Model/Profile.php";
+require_once $_root_folder . "/Model/Upload.php";
 
 //load Services
-require_once $_root_folder . "/Service/Interfacetest.php";
+require_once $_root_folder . "/Service/PlaceInterface.php";
 require_once $_root_folder . "/Service/Uploadinterface.php";
 require_once $_root_folder . "/Service/AbstractPlaceHandler.php";
 require_once $_root_folder . "/Service/CityHandler.php";
@@ -39,6 +39,7 @@ $US = $Container->getUploadService();
 $PL = $Container->getPageLoader();
 $MS = $Container->getMessageService();
 $LS = $Container->getUserLoader();
+
 
 //redirect naar NO ACCESS pagina als de gebruiker niet ingelogd is en niet naar
 //de loginpagina gaat

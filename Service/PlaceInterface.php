@@ -1,7 +1,7 @@
 <?php
 
 
-interface Interfacetest
+interface PlaceInterface
 {
     /**
      * @param $id
