@@ -1,0 +1,74 @@
+[
+  {
+    "img_id": 1,
+    "img_what": "city",
+    "img_filename": "london_2423609b",
+    "img_title": "Eye of London",
+    "img_width": 2330,
+    "img_height": 4400,
+    "img_country": null,
+    "img_capital": null,
+    "img_population": null,
+    "img_currency": null
+  },
+  {
+    "img_id": 2,
+    "img_what": "city",
+    "img_filename": "paris",
+    "img_title": "Eiffeltoren in Parijs",
+    "img_width": 30000,
+    "img_height": 40000,
+    "img_country": null,
+    "img_capital": null,
+    "img_population": null,
+    "img_currency": null
+  },
+  {
+    "img_id": 3,
+    "img_what": "city",
+    "img_filename": "berlin",
+    "img_title": "De Muur",
+    "img_width": 5600,
+    "img_height": 1400,
+    "img_country": null,
+    "img_capital": null,
+    "img_population": null,
+    "img_currency": null
+  },
+  {
+    "img_id": 4,
+    "img_what": "country",
+    "img_filename": "Mexico",
+    "img_title": "Het land van zon, strand en TEQUILLA",
+    "img_width": null,
+    "img_height": null,
+    "img_country": "Mexico",
+    "img_capital": "Mexico City",
+    "img_population": 129,
+    "img_currency": "Pesos"
+  },
+  {
+    "img_id": 5,
+    "img_what": "country",
+    "img_filename": "China",
+    "img_title": "Mao Zhedong heest hier nog steeds",
+    "img_width": null,
+    "img_height": null,
+    "img_country": "China",
+    "img_capital": "Beijing",
+    "img_population": 1386,
+    "img_currency": "Yuan (of Yen??)"
+  },
+  {
+    "img_id": 6,
+    "img_what": "country",
+    "img_filename": "Spanje",
+    "img_title": "Mexico maar dichterbij",
+    "img_width": null,
+    "img_height": null,
+    "img_country": "Spanje",
+    "img_capital": "Madrid",
+    "img_population": 47,
+    "img_currency": "Euro"
+  }
+]

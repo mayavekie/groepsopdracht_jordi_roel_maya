@@ -1,0 +1,90 @@
+
+
+<div class="col-sm-4 float_left">
+
+    <form id="form_land" method="post" action="lib/save.php">
+
+        <input type="hidden" id="formname" name="formname" value="land_form">
+        <input type="hidden" id="afterinsert" name="afterinsert" value="steden.php">
+        <input type="hidden" id="tablename" name="tablename" value="images">
+        <input type="hidden" id="pkey" name="pkey" value="img_id">
+
+        <div class="form-group">
+
+            <label for="img_title" class="col-form-label">Id</label>
+            <div>
+                <input readonly type="text" class="form-control" id="img_id" name="img_id" value="@@img_id@@">
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="img_title" class="col-form-label">Titel</label>
+            <div>
+                <input type="text" class="form-control" id="img_title" name="img_title" value="@@img_title@@">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="img_filename" class="col-form-label">Filename</label>
+            <div>
+                <input type="text" class="form-control" id="img_filename" name="img_filename" value="@@img_filename@@">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="img_country" class="col-form-label">Country</label>
+            <div>
+                <input type="text" class="form-control" id="img_country" name="img_country" value="@@img_country@@">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="img_capital" class="col-form-label">Capital</label>
+            <div>
+                <input type="text" class="form-control" id="img_capital" name="img_capital" value="@@img_capital@@">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="img_population" class="col-form-label">Population (in mil)</label>
+            <div>
+                <input type="text" class="form-control" id="img_population" name="img_population" value="@@img_population@@">
+            </div>
+
+        </div>
+
+        <div class="form-group">
+
+            <label for="img_currency" class="col-form-label">Currency</label>
+            <div>
+                <input type="text" class="form-control" id="img_currency" name="img_currency" value="@@img_currency@@">
+            </div>
+
+        </div>
+
+        <input name=savebutton type="submit" value="Save">
+
+    </form>
+
+</div>
+
+<div class="col-sm-8 float_left">
+    <img class="img-fluid img_city" src=img/@@img_filename@@.jpg>
+</div>
+
+
+
+<br>
+
+

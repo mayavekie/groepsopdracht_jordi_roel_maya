@@ -7,13 +7,19 @@ $_application_folder = "/groepswerken/groepswerk_di";
 $_root_folder = $_SERVER['DOCUMENT_ROOT'] . "$_application_folder";
 
 //load Models
+require_once $_root_folder . "/Model/Places.php";
+require_once $_root_folder . "/Model/Countries.php";
 require_once $_root_folder . "/Model/City.php";
 require_once $_root_folder . "/Model/User.php";
 require_once $_root_folder . "/Model/Profile.php";
 require_once $_root_folder . "/Model/Upload.php";
 
 //load Services
+
+require_once $_root_folder . "/Service/Interfacetest.php";
+require_once $_root_folder . "/Service/AbstractPlaceHandler.php";
 require_once $_root_folder . "/Service/CityHandler.php";
+require_once $_root_folder . "/Service/CountryHandler.php";
 require_once $_root_folder . "/Service/MessageService.php";
 require_once $_root_folder . "/Service/Container.php";
 require_once $_root_folder . "/Service/PageLoader.php";

@@ -12,6 +12,7 @@ class Container
     private $uploadService;
     private $download;
     private $profileService;
+    private $countryHandler;
 
     public function __construct(array $configuration){
         $this->configuration = $configuration;
@@ -113,8 +114,14 @@ class Container
         return $this->profileService;
     }
 
-
-
+    /**
+     * @return mixed
+     */
+    public function getCountryHandler()
+    {
+        if($this->countryHandler === null ) $this->countryHandler = new CountryHandler($this->getPDO());
+        return $this->countryHandler;
+    }
 
 
 }

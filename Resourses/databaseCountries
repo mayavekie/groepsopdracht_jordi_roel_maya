@@ -1,0 +1,22 @@
+create table if not exists php2_steden.images
+(
+	img_id mediumint auto_increment
+		primary key,
+	img_what varchar(512) null,
+	img_filename varchar(512) null,
+	img_title varchar(512) null,
+	img_width mediumint null,
+	img_height mediumint null,
+	img_country varchar(512) null,
+	img_capital varchar(512) null,
+	img_population int(15) null,
+	img_currency varchar(512) null
+)
+charset=utf8;
+
+INSERT INTO php2_steden.images (img_id, img_what, img_filename, img_title, img_width, img_height, img_country, img_capital, img_population, img_currency) VALUES (1, 'city', 'london_2423609b', 'Eye of London', 2330, 4400, null, null, null, null);
+INSERT INTO php2_steden.images (img_id, img_what, img_filename, img_title, img_width, img_height, img_country, img_capital, img_population, img_currency) VALUES (2, 'city', 'paris', 'Eiffeltoren in Parijs', 30000, 40000, null, null, null, null);
+INSERT INTO php2_steden.images (img_id, img_what, img_filename, img_title, img_width, img_height, img_country, img_capital, img_population, img_currency) VALUES (3, 'city', 'berlin', 'De Muur', 5600, 1400, null, null, null, null);
+INSERT INTO php2_steden.images (img_id, img_what, img_filename, img_title, img_width, img_height, img_country, img_capital, img_population, img_currency) VALUES (4, 'country', 'Mexico', 'Het land van zon, strand en TEQUILLA', null, null, 'Mexico', 'Mexico City', 129, 'Pesos');
+INSERT INTO php2_steden.images (img_id, img_what, img_filename, img_title, img_width, img_height, img_country, img_capital, img_population, img_currency) VALUES (5, 'country', 'China', 'Mao Zhedong heest hier nog steeds', null, null, 'China', 'Beijing', 1386, 'Yuan (of Yen??)');
+INSERT INTO php2_steden.images (img_id, img_what, img_filename, img_title, img_width, img_height, img_country, img_capital, img_population, img_currency) VALUES (6, 'country', 'Spanje', 'Mexico maar dichterbij', null, null, 'Spanje', 'Madrid', 47, 'Euro');

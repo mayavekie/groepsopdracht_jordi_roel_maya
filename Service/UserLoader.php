@@ -65,7 +65,6 @@ class UserLoader
     }
 
 
-
     public function CheckLogin()
     {
         global $Container;
@@ -97,7 +96,6 @@ class UserLoader
 
         return false;
     }
-
 
     public function LogLoginUser()
     {

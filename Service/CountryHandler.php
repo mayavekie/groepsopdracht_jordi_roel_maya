@@ -1,5 +1,7 @@
 <?php
-class CityHandler extends AbstractPlaceHandler implements Interfacetest
+
+
+class CountryHandler extends AbstractPlaceHandler implements Interfacetest
 {
     private $pdo;
 
@@ -13,7 +15,7 @@ class CityHandler extends AbstractPlaceHandler implements Interfacetest
         if($id >0) {
             $statement = $pdo->prepare('SELECT * FROM images where img_id= '.$id );
         }else{
-            $statement = $pdo->prepare("SELECT * FROM images WHERE img_what = 'city'");
+            $statement = $pdo->prepare("SELECT * FROM images WHERE img_what = 'country'");
         }
 
         $statement->execute();
@@ -32,8 +34,10 @@ class CityHandler extends AbstractPlaceHandler implements Interfacetest
             $content = str_replace("@@img_id@@", $city->getId(), $content);
             $content = str_replace("@@img_title@@", $city->getTitle(), $content);
             $content = str_replace("@@img_filename@@", $city->getFileName(), $content);
-            $content = str_replace("@@img_width@@", $city->getWidth(), $content);
-            $content = str_replace("@@img_height@@", $city->getHeight(), $content);
+            $content = str_replace("@@img_country@@", $city->getCountry(), $content);
+            $content = str_replace("@@img_capital@@", $city->getCapital(), $content);
+            $content = str_replace("@@img_population@@", $city->getPopulation(), $content);
+            $content = str_replace("@@img_currency@@", $city->getCurrency(), $content);
 
             $returnval .= $content;
         }
@@ -41,9 +45,9 @@ class CityHandler extends AbstractPlaceHandler implements Interfacetest
         return $returnval;
     }
 
-    public function Load(  )
+    public function Load()
     {
-        $cities = array();
+        $countries = array();
 
         $sql = $this->queryForPlaces($id = $_GET['id']);
 
@@ -51,17 +55,19 @@ class CityHandler extends AbstractPlaceHandler implements Interfacetest
 
         foreach ($data as $row)
         {
-            $city = new City();
+            $country = new Countries();
 
-            $city->setId( $row['img_id'] );
-            $city->setFileName( $row['img_filename'] );
-            $city->setTitle( $row['img_title'] );
-            $city->setWidth( $row['img_width'] );
-            $city->setHeight( $row['img_height'] );
+            $country->setId( $row['img_id'] );
+            $country->setFileName( $row['img_filename'] );
+            $country->setTitle( $row['img_title'] );
+            $country->setCapital( $row['img_capital'] );
+            $country->setPopulation( $row['img_population'] );
+            $country->setCurrency( $row['img_currency'] );
+            $country->setCountry( $row['img_country'] );
 
-            $cities[] = $city;
+            $countries[] = $country;
         }
 
-        return $cities;
+        return $countries;
     }
 }
