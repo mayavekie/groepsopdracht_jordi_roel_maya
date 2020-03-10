@@ -1,7 +1,7 @@
 <?php
-/*ini_set("error_reporting", E_ALL);
+ini_set("error_reporting", E_ALL);
 ini_set("display_errors", 1);
-ini_set("display_startup_errors", 1);*/
+ini_set("display_startup_errors", 1);
 
 $_application_folder = "/groepswerken/groepswerk_di";
 $_root_folder = $_SERVER['DOCUMENT_ROOT'] . "$_application_folder";
@@ -16,7 +16,7 @@ require_once $_root_folder . "/Model/Upload.php";
 
 //load Services
 
-require_once $_root_folder . "/Service/Interfacetest.php";
+require_once $_root_folder . "/Service/PlaceInterface.php";
 require_once $_root_folder . "/Service/AbstractPlaceHandler.php";
 require_once $_root_folder . "/Service/CityHandler.php";
 require_once $_root_folder . "/Service/CountryHandler.php";
