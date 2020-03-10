@@ -1,7 +1,7 @@
 <?php
 
 
-class UploadService
+class UploadService implements UploadInterface
 {
     private $pdo;
     private $upload;
@@ -13,17 +13,17 @@ class UploadService
         $this->messageService = new MessageService();
     }
 
-    public function CheckUploadedFile($upfile)
+    public function CheckUpload($upfile)
     {
         $this->CheckIfRealImage($upfile);
-        $this->CheckIfFileExists($upfile);
-        $this->CheckFileSize($upfile);
-        $this->CheckFileFormat($upfile);
+        $this->CheckIfExists($upfile);
+        $this->CheckSize($upfile);
+        $this->CheckFormat($upfile);
 
         return $this->upload->isReturnvalue();
     }
 
-    private function CheckIfRealImage($upfile) {
+    public function CheckIfRealImage($upfile) {
         // Check if image file is a actual image or fake image
         if ($upfile["getimagesize"] === false) {
             $this->messageService->AddMessage("File " . $upfile["name"] . " is not an image.", "error");
@@ -31,7 +31,7 @@ class UploadService
         }
     }
 
-    private function CheckIfFileExists($upfile) {
+    public function CheckIfExists($upfile) {
         // Check if file already exists
         if (file_exists($upfile["target_path_name"])) {
             $this->messageService->AddMessage("File  " . $upfile["name"] . " already exists.", "error");
@@ -39,7 +39,7 @@ class UploadService
         }
     }
 
-    private function CheckFileSize($upfile) {
+    public function CheckSize($upfile) {
         // Check file size
         if ($upfile["size"] > $this->upload->getMaxSize()) {
            $this->messageService->AddMessage("File  " . $upfile["name"] . "  is too large.", "error");
@@ -47,7 +47,7 @@ class UploadService
         }
     }
 
-    private function CheckFileFormat($upfile) {
+    public function CheckFormat($upfile) {
         // Allow only certain file formats
         if (!in_array($upfile["extension"], $this->upload->getAllowedExtensions())) {
             $this->messageService->AddMessage("Wrong extension. Only " . implode(", ", $this->upload->getAllowedExtensions()) . " files are allowed.", "error");
@@ -80,7 +80,7 @@ class UploadService
             $upfile["getimagesize"]     = getimagesize($upfile["tmp_name"]);
             $upfile["size"]             = $f["size"];
 
-            $result = $this->CheckUploadedFile( $upfile );
+            $result = $this->CheckUpload( $upfile );
             $this->ResponseToUpload($result, $upfile);
         }
     }

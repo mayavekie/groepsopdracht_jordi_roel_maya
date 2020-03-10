@@ -1,7 +1,7 @@
 <?php
 
 
-class ProfileService
+class ProfileService implements UploadInterface
 {
     private $pdo;
     private $profile;
@@ -16,14 +16,14 @@ class ProfileService
 
     }
 
-    public function CheckUploadProfile(){
-        $this->CheckProfileSize();
-        $this->CheckProfileFormat();
-        $this->CheckIfRealProfileImage();
-        $this->CheckIfProfileAlreadyExsists();
+    public function CheckUpload($upfile = null){
+        $this->CheckSize();
+        $this->CheckFormat();
+        $this->CheckIfRealImage();
+        $this->CheckIfExists();
     }
 
-    public function CheckProfileSize(){
+    public function CheckSize($upfile = null){
         if ( $this->profile->getSize() > $this->profile->getMaxSize() )
         {
             $this->messageService->AddMessage("Bestand " . $this->profile->getOrigineleNaam() . " is te groot (" . $this->profile->getSize() . " bytes). Maximum " . $this->profile->getMaxSize() . " bytes!", "error");
@@ -31,7 +31,7 @@ class ProfileService
         }
     }
 
-    public function CheckProfileFormat() {
+    public function CheckFormat($upfile = null) {
         //toegelaten extensies
         if ( ! in_array( pathinfo($this->profile->getOrigineleNaam(), PATHINFO_EXTENSION), $this->profile->getAllowedExtensions() ))
         {
@@ -40,7 +40,7 @@ class ProfileService
         }
     }
 
-    public function CheckIfRealProfileImage() {
+    public function CheckIfRealImage($upfile = null) {
         //is het bestand wel echt een afbeelding?
         if ( getimagesize($this->profile->getTmpName()) === false)
         {
@@ -49,7 +49,7 @@ class ProfileService
         }
     }
 
-    public function CheckIfProfileAlreadyExsists() {
+    public function CheckIfExists($upfile = null) {
         //bestaat het bestand al?
         if ( file_exists($this->profile->getTarget()) )
         {
@@ -126,7 +126,7 @@ class ProfileService
         foreach ( $_FILES as $inputname => $fileobject )
         {
             $this->profile->LoadImageInfo($fileobject);
-            $this->CheckUploadProfile();
+            $this->CheckUpload();
 
             if ( $this->profile->isReturnvalue() )
             {
