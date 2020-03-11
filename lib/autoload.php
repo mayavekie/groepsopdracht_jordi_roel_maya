@@ -11,8 +11,9 @@ require_once $_root_folder . "/Model/Places.php";
 require_once $_root_folder . "/Model/Countries.php";
 require_once $_root_folder . "/Model/City.php";
 require_once $_root_folder . "/Model/User.php";
-require_once $_root_folder . "/Model/Profile.php";
 require_once $_root_folder . "/Model/Upload.php";
+require_once $_root_folder . "/Model/Profile.php";
+
 
 //load Services
 require_once $_root_folder . "/Service/PlaceInterface.php";

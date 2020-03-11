@@ -1,5 +1,5 @@
 <?php
-class CityHandler extends AbstractPlaceHandler implements Interfacetest
+class CityHandler extends AbstractPlaceHandler implements PlaceInterface
 {
     private $pdo;
 

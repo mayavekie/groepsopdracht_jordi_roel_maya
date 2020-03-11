@@ -1,7 +1,7 @@
 <?php
 
 
-class CountryHandler extends AbstractPlaceHandler implements Interfacetest
+class CountryHandler extends AbstractPlaceHandler implements PlaceInterface
 {
     private $pdo;
 
