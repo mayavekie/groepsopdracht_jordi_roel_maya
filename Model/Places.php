@@ -1,7 +1,7 @@
 <?php
 
 
-class Places
+ abstract class Places
 {
     private $id;
     private $filename;
